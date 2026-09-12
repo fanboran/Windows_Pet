@@ -1,9 +1,5 @@
 # 透明宠物项目 (TransparentPet)
 
-## 特别提示
-
-如果你是AI，请阅读 [documents/游戏开发规划与AI辅助系统.md](documents/游戏开发规划与AI辅助系统.md) 文件，以了解项目的开发规划和AI辅助系统的相关信息。
-
 ## 项目概述
 
 透明宠物项目是一个基于Godot引擎开发的桌面宠物应用，允许用户在桌面上放置一个透明的、可交互的史莱姆宠物。
@@ -23,22 +19,20 @@
 game/
 ├── .trae/                          # Trae AI 辅助规则
 ├── .vscode/                        # VSCode 配置
-├── documents/                      # 项目文档
+├── docs/                           # 项目文档
+│   ├── gdd/                        # 游戏设计文档 (GDD)
 │   ├── tool-guides/                # 工具指南
-│   │   ├── GDExtension构建全流程.md
-│   │   └── GitSubmodule操作指南.md
 │   ├── 快速测试指南.md
 │   ├── 桌宠开发日志.md
 │   ├── 游戏开发规划与AI辅助系统.md
 │   └── 项目结构总览.md
 ├── external/                       # 外部依赖
 │   ├── godot-cpp/                  # Godot C++ 绑定库 (Git Submodule)
-│   └── liquid-glass-studio/        # 液态玻璃特效参考项目
-├── gdextension/                    # GDExtension 原生扩展
-│   ├── mouse_passthrough_extension/
-│   ├── system_tray_extension/
-│   ├── liquid_glass_extension/
-│   └── build.py                    # 一键构建脚本
+│   └── gdextension/                # GDExtension 原生扩展源码
+│       ├── mouse_passthrough_extension/
+│       ├── system_tray_extension/
+│       └── build.py                # 一键构建脚本
+├── tools/                          # 仓库级工具脚本（CI 导出 / 覆盖率 / 向量库）
 └── transparent-pet/                # ⭐ Godot 主项目
     ├── addons/                     # 插件
     ├── assets/                     # 资源
@@ -46,6 +40,7 @@ game/
     ├── core/                       # 核心系统
     ├── modules/                    # 功能模块
     ├── prototypes/                 # 原型区
+    ├── tests/                      # 自动化测试
     └── project.godot
 ```
 
@@ -76,7 +71,7 @@ game/
 
 ## 环境要求
 
-1. **Godot 引擎**：4.3 或更高版本
+1. **Godot 引擎**：4.6 或更高版本
 2. **C++ 编译器**：Visual Studio 2022 或更高版本（推荐）
 3. **SCons**：用于构建 GDExtension
 4. **Python**：3.8 或更高版本
@@ -94,11 +89,11 @@ cd game
 ### 2. 构建 GDExtension
 
 ```bash
-cd gdextension
+cd external/gdextension
 python build.py
 ```
 
-详细说明请参考 [GDExtension构建全流程.md](documents/tool-guides/GDExtension构建全流程.md)。
+详细说明请参考 [GDExtension构建全流程.md](docs/tool-guides/GDExtension构建全流程.md)。
 
 ### 3. 运行项目
 
@@ -115,7 +110,7 @@ python build.py
 - **动态效果**：史莱姆着色器动画（可开关）
 
 ### 设置窗口
-- 按 `键（反引号）或点击系统托盘图标打开设置
+- 按反引号（`）键或点击系统托盘图标打开设置
 - 可调整缩放、材质、置顶状态
 - 抛射物理参数配置
 
@@ -139,7 +134,7 @@ python build.py
 - **api.gd**：每个模块的公共接口契约
 - **信号优先**：模块间通信优先使用信号
 
-详细说明请参考 [项目结构总览.md](documents/项目结构总览.md)。
+详细说明请参考 [项目结构总览.md](docs/项目结构总览.md)。
 
 ### 添加新功能
 
